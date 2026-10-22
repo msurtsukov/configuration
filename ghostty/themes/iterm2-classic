@@ -1,0 +1,27 @@
+# На основе профиля "Default" из iTerm2, слегка смягчённые цвета.
+palette = 0=#131513
+palette = 1=#c41e1e
+palette = 2=#1ebe1e
+palette = 3=#c0be1e
+palette = 4=#252dc6
+palette = 5=#be23be
+palette = 6=#1ebdbd
+palette = 7=#babcba
+palette = 8=#5c5e5c
+palette = 9=#f06464
+palette = 10=#67f064
+palette = 11=#f0f064
+palette = 12=#6a6df2
+palette = 13=#f068f0
+palette = 14=#64f0f0
+palette = 15=#f4f5f4
+
+background = #070807
+foreground = #44e63e
+# iTerm2 "Bold Color" + "Use Bright Bold": жирный default-текст — этим цветом,
+# остальные жирные ANSI-цвета — из bright-палитры.
+bold-color = #22eaac
+cursor-color = #6ae15c
+cursor-text = #070807
+selection-background = #1a58a0
+selection-foreground = #f2f0f0

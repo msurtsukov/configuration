@@ -1,0 +1,41 @@
+onboarding = false
+
+[ui]
+agent_panel_sort = "spaces"
+window_title = "{hostname}: {workspace} · {terminal_title}"
+status_indicators = "symbols"
+sidebar_width = 32
+sidebar_min_width = 32
+sidebar_max_width = 32
+copy_on_select = false
+prompt_new_tab_name = false
+
+[theme]
+name = "terminal"
+auto_switch = false
+
+[ui.sound]
+enabled = false
+
+[ui.sidebar.agents]
+rows = [
+  ["state_icon", "agent", "state_text"],
+  ["terminal_title_stripped"],
+]
+
+[keys]
+new_tab = "cmd+t"
+close_tab = "cmd+w"
+split_vertical = "cmd+d"
+split_horizontal = "cmd+shift+d"
+switch_tab = "cmd+1..9"
+switch_workspace = "alt+1..9"
+cycle_pane_next = "cmd+]"
+cycle_pane_previous = "cmd+["
+next_tab = "cmd+shift+]"
+previous_tab = "cmd+shift+["
+
+[experimental]
+# После prefix (ctrl+b) herdr временно включает латинскую раскладку, чтобы
+# prefix+c, prefix+v, prefix+h/j/k/l и т.п. работали при русской раскладке.
+switch_ascii_input_source_in_prefix = true

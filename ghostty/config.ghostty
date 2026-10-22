@@ -1,0 +1,132 @@
+font-family = "SF Mono"
+font-size = 13
+font-feature = -calt
+font-feature = -liga
+font-feature = -dlig
+# font-thicken делало шрифт жирноватым
+font-thicken = false
+adjust-cell-height = 10%
+
+
+# ─── Theme ────────────────────────────────────────────────────────────
+# Цвета профиля iTerm2 Default: ~/.config/ghostty/themes/iterm2-classic
+# (прежняя тема была: nord)
+theme = iterm2-classic
+
+# ─── Cursor ───────────────────────────────────────────────────────────
+cursor-style = bar
+cursor-style-blink = false
+
+# ─── Keyboard (this is the part that matters for Claude Code) ─────────
+macos-option-as-alt = true
+
+# Эти сочетания забирает herdr (~/.config/herdr/config.toml, секция [keys]):
+#   cmd+t/w, cmd+d, cmd+shift+d, cmd+1..9, cmd+[ ], cmd+shift+[ ], alt+1..9.
+# Ghostty должен их НЕ перехватывать, тогда они уйдут в herdr через
+# kitty keyboard protocol. Свои вкладки Ghostty — на cmd+shift+t/w и ctrl+tab.
+keybind = cmd+t=unbind
+keybind = cmd+n=unbind
+keybind = cmd+w=unbind
+keybind = cmd+shift+w=unbind
+keybind = cmd+d=unbind
+keybind = cmd+shift+d=unbind
+keybind = cmd+[=unbind
+keybind = cmd+]=unbind
+keybind = cmd+shift+[=unbind
+keybind = cmd+shift+]=unbind
+keybind = cmd+1=unbind
+keybind = cmd+digit_1=unbind
+keybind = cmd+2=unbind
+keybind = cmd+digit_2=unbind
+keybind = cmd+3=unbind
+keybind = cmd+digit_3=unbind
+keybind = cmd+4=unbind
+keybind = cmd+digit_4=unbind
+keybind = cmd+5=unbind
+keybind = cmd+digit_5=unbind
+keybind = cmd+6=unbind
+keybind = cmd+digit_6=unbind
+keybind = cmd+7=unbind
+keybind = cmd+digit_7=unbind
+keybind = cmd+8=unbind
+keybind = cmd+digit_8=unbind
+keybind = cmd+9=unbind
+keybind = cmd+digit_9=unbind
+
+keybind = shift+cmd+t=new_tab
+keybind = shift+cmd+w=close_tab
+
+# ─── Русская раскладка ────────────────────────────────────────────────
+# Обычные триггеры (cmd+c) сравниваются с НАПЕЧАТАННЫМ символом, поэтому на
+# русской раскладке cmd+с(кирилл.) не срабатывает. key_* — физические клавиши
+# (W3C-коды), работают в любой раскладке и имеют приоритет над символьными.
+keybind = cmd+key_c=copy_to_clipboard:mixed
+keybind = cmd+key_v=paste_from_clipboard
+keybind = cmd+shift+key_v=paste_from_selection
+keybind = cmd+key_a=select_all
+keybind = cmd+key_k=clear_screen
+keybind = cmd+key_z=undo
+keybind = cmd+shift+key_z=redo
+keybind = cmd+key_q=quit
+keybind = cmd+key_f=start_search
+keybind = cmd+shift+key_f=end_search
+keybind = cmd+key_e=search_selection
+keybind = cmd+key_g=navigate_search:next
+keybind = cmd+shift+key_g=navigate_search:previous
+keybind = cmd+key_j=scroll_to_selection
+keybind = cmd+shift+key_j=write_screen_file:paste,plain
+keybind = cmd+ctrl+shift+key_j=write_screen_file:copy,plain
+keybind = cmd+alt+shift+key_j=write_screen_file:open,plain
+keybind = cmd+shift+key_p=toggle_command_palette
+keybind = cmd+alt+key_i=inspector:toggle
+keybind = cmd+ctrl+key_f=toggle_fullscreen
+keybind = cmd+comma=open_config
+keybind = cmd+shift+comma=reload_config
+keybind = cmd+shift+key_t=new_tab
+keybind = cmd+shift+key_w=close_tab
+keybind = cmd+alt+key_w=close_tab:this
+keybind = cmd+alt+shift+key_w=close_all_windows
+
+# Сочетания herdr: на русской раскладке Ghostty отправил бы в herdr cmd+«е»
+# вместо cmd+t, и herdr бы его не узнал. Поэтому по физической клавише шлём
+# готовую kitty-последовательность латинской клавиши: CSI <код>;<1+мод> u,
+# где super=8, shift=1 (cmd → 9, cmd+shift → 10).
+# Минус: вне herdr (голый shell без kitty-протокола) эти сочетания напечатают
+# мусор вида [116;9u — но там они и раньше ничего полезного не делали.
+keybind = cmd+key_t=csi:116;9u
+keybind = cmd+key_w=csi:119;9u
+keybind = cmd+key_d=csi:100;9u
+keybind = cmd+shift+key_d=csi:100;10u
+keybind = cmd+bracket_left=csi:91;9u
+keybind = cmd+bracket_right=csi:93;9u
+keybind = cmd+shift+bracket_left=csi:91;10u
+keybind = cmd+shift+bracket_right=csi:93;10u
+
+# Shift+Enter → newline. Your plist has NO binding for this, which is why
+# it submits. Claude Code reads a bare LF as newline and CR as submit.
+# keybind = shift+enter=text:\n
+
+# scrolling
+mouse-scroll-multiplier = precision:3,discrete:1
+
+# clipboard over SSH
+clipboard-write = allow
+clipboard-read = allow
+
+# ─── Window ───────────────────────────────────────────────────────────
+background-opacity = 1.0
+confirm-close-surface = true
+unfocused-split-opacity = 0.6
+macos-non-native-fullscreen = visible-menu
+
+# ─── Scrollback ───────────────────────────────────────────────────────
+# Ghostty's limit is in BYTES, not lines (default 10MB). 1GB is effectively
+# unlimited. Внутри herdr скроллбек ведёт сам herdr (prefix+[ — copy mode).
+scrollback-limit = 1000000000
+
+# ─── Remote work ──────────────────────────────────────────────────────
+shell-integration-features = cursor,sudo,title,ssh-env,ssh-terminfo
+
+macos-icon = retro
+macos-icon-frame = plastic
+macos-icon-ghost-color = blue
